@@ -1,31 +1,41 @@
-const nomeHeroi = gets(); // lê uma linha
-const expHeroi = parseInt(gets()); // lê outra linha e converte para número
+const readline = require("readline");
 
-let nivelHeroi = '';
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-if (expHeroi < 1000) {
+function perguntar(pergunta) {
+  return new Promise(resolve => rl.question(pergunta, resolve));
+}
+
+async function main() {
+  const nomeHeroi = await perguntar("Digite o nome do herói: ");
+  const expHeroi = parseInt(await perguntar("Digite a experiência do herói: "));
+
+  let nivelHeroi = '';
+
+  if (expHeroi <= 1000) {
     nivelHeroi = "Ferro";
-}
-else if (expHeroi > 1000 && expHeroi <= 2000) {
+  } else if (expHeroi > 1000 && expHeroi <= 2000) {
     nivelHeroi = "Bronze";
-}
-else if (expHeroi > 2000 && expHeroi <= 5000) {
+  } else if (expHeroi > 2000 && expHeroi <= 5000) {
     nivelHeroi = "Prata";
-}
-else if (expHeroi > 5000 && expHeroi <= 7000) {
+  } else if (expHeroi > 5000 && expHeroi <= 7000) {
     nivelHeroi = "Ouro";
-}
-else if (expHeroi > 7000 && expHeroi <= 8000) {
+  } else if (expHeroi > 7000 && expHeroi <= 8000) {
     nivelHeroi = "Platina";
-}
-else if (expHeroi > 8000 && expHeroi <= 9000) {
+  } else if (expHeroi > 8000 && expHeroi <= 9000) {
     nivelHeroi = "Ascendente";
-}
-else if (expHeroi > 9000 && expHeroi <= 10000) {
+  } else if (expHeroi > 9000 && expHeroi <= 10000) {
     nivelHeroi = "Imortal";
-}
-else {
+  } else {
     nivelHeroi = "Radiante";
+  }
+
+  console.log("O Herói de nome: " + nomeHeroi + " está no nível de " + nivelHeroi);
+
+  rl.close();
 }
 
-console.log("O Herói de nome: " + nomeHeroi + "está no nível de " + nivelHeroi);
+main();
